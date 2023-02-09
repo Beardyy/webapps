@@ -88,4 +88,12 @@ describe Application do
       expect(response.body).to include('Artist: Pixies')
     end
   end
+
+  context "GET /albums/" do
+    it 'gets all album details' do
+      response = get('/albums')
+      expect(response.status).to eq 200
+      expect(response.body).to include('<div> Title: Doolittle Released: 1989</div>')
+    end
+  end
 end
