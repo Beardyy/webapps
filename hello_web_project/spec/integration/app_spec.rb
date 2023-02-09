@@ -11,33 +11,45 @@ describe Application do
   # We need to declare the `app` value by instantiating the Application
   # class so our tests work.
   let(:app) { Application.new }
+
   context "GET /" do
     it 'returns 200 OK' do
       # Assuming the post with id 1 exists.
       response = get('/names')
-
       expect(response.status).to eq(200)
-
       expected_response = "Julia, Mary, Karim"
-
       expect(response.body).to eq expected_response
-
-      # expect(response.body).to eq(expected_response)
     end
   end
+
   context "POST /sort-names" do
     it 'returns 200 OK & names sorted' do
       response = post('/sort-names?names=Joe,Alice,Zoe,Julia,Kieran')
-
       expect(response.status).to eq(200)
       expected_response = "Alice,Joe,Julia,Kieran,Zoe"
       expect(response.body).to eq(expected_response)
     end
-
     # it 'returns 400 Bad Request' do
     #   response = post('/sort-names?names=')
-
     #   expect{response.status}.to eq(400)
     # end
+  end
+  # context "GET to /" do
+  #   it 'contains a h1 title' do
+  #     response = get('/')
+  #     expect(response.body).to include('<h1>Hello</h1>')
+  #   end
+  #   it 'contains a div' do
+  #     response = get('/')
+  #     expect(response.body).to include('<div>')
+  #   end
+  # end
+  context "GET /hello" do
+    it 'returns Hello' do
+      # Assuming the post with id 1 exists.
+      response = get('/hello')
+
+      expect(response.body).to include('Hello!')
+    end
   end
 end
