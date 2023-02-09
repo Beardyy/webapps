@@ -17,10 +17,10 @@ class Application < Sinatra::Base
   get '/albums' do
     repo = AlbumRepository.new
     albums = repo.all
-
     response = albums.map{ |album| album.title }.join(", ")
+    return response
   end
-  
+
   post '/albums' do
     repo = AlbumRepository.new
     new_album = Album.new

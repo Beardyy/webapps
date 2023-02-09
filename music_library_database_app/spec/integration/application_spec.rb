@@ -28,7 +28,6 @@ describe Application do
 
   context "GET /albums" do
     it 'returns 200 OK and all album names' do
-      # Assuming the post with id 1 exists.
       response = get('/albums')
 
       expected_response ='Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring'
@@ -45,16 +44,16 @@ describe Application do
         title: 'Voyage',
         release_year: '2022',
         artist_id: '2')
-
+  
       expect(response.status).to eq(200)
       expect(response.body).to eq('')
-
+  
       response1 = get('/albums')
-
+  
       expect(response1.body).to include('Voyage')
     end
   end
-
+  
   context "GET /artists" do
     it 'returns 200 OK & All artists' do
       # Assuming the post with id 1 exists.
@@ -64,24 +63,24 @@ describe Application do
       expect(response.body).to eq(expected_response)
     end
   end
-
+  
   context "POST /artists" do
     it 'creates new artist (Wild nothing/Indie)' do
       response = post(
         '/artists',
         name: 'Wild nothing',
         genre: 'Indie')
-
+  
       expect(response.status).to eq(200)
       expect(response.body).to eq('')
-
+  
       response = get('/artists')
       expect(response.body).to eq('Pixies, ABBA, Taylor Swift, Nina Simone, Wild nothing')
     end
   end
-
+  
   context "GET /albums/:id" do
-    xit 'gets album id and details' do
+    it 'gets album id and details' do
       response = get('/albums/1')
       expect(response.status).to eq 200
       expect(response.body).to include('<h1>Doolittle</h1>')
